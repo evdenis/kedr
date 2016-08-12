@@ -64,71 +64,36 @@
 #endif
 /* ====================================================================== */
 
-/* Different fields of struct module are used to access the memory of a
- * module before kernel 4.5 and after. See commit 7523e4dc5057 in the
- * mainline kernel for details. */
-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 5, 0)
 static inline void *module_core_addr(struct module *mod)
 {
-	return mod->core_layout.base;
+	return mod->module_core_rx;
 }
 
 static inline unsigned int core_text_size(struct module *mod)
 {
-	return mod->core_layout.text_size;
+	return mod->core_size_rx;
 }
 
 static inline unsigned int core_size(struct module *mod)
 {
-	return mod->core_layout.size;
-}
-
-
-static inline void *module_init_addr(struct module *mod)
-{
-	return mod->init_layout.base;
-}
-
-static inline unsigned int init_text_size(struct module *mod)
-{
-	return mod->init_layout.text_size;
-}
-
-static inline unsigned int init_size(struct module *mod)
-{
-	return mod->init_layout.size;
-}
-#else
-static inline void *module_core_addr(struct module *mod)
-{
-	return mod->module_core;
-}
-
-static inline unsigned int core_text_size(struct module *mod)
-{
-	return mod->core_text_size;
-}
-
-static inline unsigned int core_size(struct module *mod)
-{
-	return mod->core_size;
+	return mod->core_size_rw;
 }
 
 static inline void *module_init_addr(struct module *mod)
 {
-	return mod->module_init;
+	return mod->module_init_rx;
 }
 
 static inline unsigned int init_text_size(struct module *mod)
 {
-	return mod->init_text_size;
+	return mod->init_size_rx;
 }
 
 static inline unsigned int init_size(struct module *mod)
 {
-	return mod->init_size;
+	return mod->init_size_rw;
 }
-#endif
+
 /* ====================================================================== */
 
 #endif /* CONFIG_H_1734_INCLUDED */
