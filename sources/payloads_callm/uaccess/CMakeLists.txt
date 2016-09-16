@@ -15,14 +15,6 @@ endif(NOT KERNEL_PART)
 configure_file("header.data.in"
 	"${CMAKE_CURRENT_BINARY_DIR}/header.data")
 
-kmodule_configure_kernel_functions(copy_to_user_FUNCTION REQUIRED
-	ONE_OF_BEGIN "copy_to_user" "_copy_to_user" "__copy_to_user" "___copy_to_user" ONE_OF_END
-)
-
-kmodule_configure_kernel_functions(copy_from_user_FUNCTION REQUIRED
-	ONE_OF_BEGIN "copy_from_user" "_copy_from_user" "__copy_from_user" "___copy_from_user" ONE_OF_END
-)
-
 kmodule_configure_kernel_functions(strndup_user_FUNCTION REQUIRED 
 	"strndup_user"
 )
